@@ -15,16 +15,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    HashMap<Integer, String> historial = new HashMap<>();
+   ArrayList<String> historial = new ArrayList<>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        historial.put(0,"");
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -45,16 +45,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Intent recibir = new Intent(this, Activity2.class);
+        Intent recibir = getIntent();
         if(recibir.getSerializableExtra("historial")!=null){
-            historial = (HashMap<Integer, String>) recibir.getSerializableExtra("historial");
+            historial =recibir.getStringArrayListExtra("historial");
             for(int i=0;i<historial.size();i++){
                 TextView nuevoTexto = new TextView(this);
                 ((LinearLayout)findViewById(R.id.scroll)).addView(nuevoTexto);
-                nuevoTexto.setText(historial.get(i));
                 nuevoTexto.setVisibility(View.VISIBLE);
                 nuevoTexto.setBackgroundColor(Color.RED);
-                nuevoTexto.setHeight(12);
             }
         }
 
@@ -63,9 +61,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void enviarMensaje(View view) {
+
+
+
         Intent enviar = new Intent(this, Activity2.class);
-        historial.put(1,((TextView)findViewById(R.id.editTextText)).getText().toString());
-        enviar.putExtra("historial",historial);
+        historial.add("Si");
+        historial.add("No");
+        Log.i("ARRAY",historial.get(0));
+        enviar.putExtra("Prueba","2");
+        enviar.putStringArrayListExtra("historial",historial);
         startActivity(enviar);
     }
 }
