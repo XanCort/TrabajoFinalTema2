@@ -5,7 +5,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -15,12 +17,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class Activity2 extends AppCompatActivity {
 
-    ArrayList<String> historial = new ArrayList<>();
+    ArrayList<ArrayList<String>> historial = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +39,42 @@ public class Activity2 extends AppCompatActivity {
 
         super.onResume();
         Intent recibir = getIntent();
-        historial= ((ArrayList<String>) recibir.getSerializableExtra("historial"));
+        historial= ((ArrayList<ArrayList<String>>) recibir.getSerializableExtra("historial"));
         for(int i=0;i<historial.size();i++){
             TextView nuevoTexto = new TextView(this);
+            nuevoTexto.setId(View.generateViewId());
             ((LinearLayout)findViewById(R.id.scroll)).addView(nuevoTexto);
-            nuevoTexto.setText(R.string.app_name);
+            nuevoTexto.setText(historial.get(i).get(1).toString());
             nuevoTexto.setVisibility(View.VISIBLE);
-            nuevoTexto.setBackgroundColor(Color.RED);
-        }
+            nuevoTexto.setMaxWidth(10);
 
+            if(historial.get(i).get(0).equals("1")){
+                nuevoTexto.setBackgroundColor(Color.RED);
+                nuevoTexto.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+            }else if(historial.get(i).get(0).equals("2")){
+                nuevoTexto.setBackgroundColor(Color.GREEN);
+                nuevoTexto.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+            }else{
+                nuevoTexto.setBackgroundColor(Color.YELLOW);
+            }
+            nuevoTexto.setPadding(10,10,10,10);
+        }
+        (findViewById(R.id.scrolView)).post(new Runnable() {
+            public void run() {
+                ((ScrollView)findViewById(R.id.scrolView)).fullScroll(View.FOCUS_DOWN);
+            }
+        });
 
     }
 
     public void enviarMensaje(View view) {
         Intent enviar = new Intent(this, MainActivity.class);
+        ArrayList<String> nuevaEntrada = new ArrayList<>();
+        nuevaEntrada.add("2");
+        nuevaEntrada.add(((EditText)findViewById(R.id.editTextText)).getText().toString());
+        historial.add(nuevaEntrada);
         enviar.putExtra("historial",historial);
+
         startActivity(enviar);
     }
 }

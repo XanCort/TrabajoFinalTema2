@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E6FFCE"
     tools:context=".MainActivity">
 
     <EditText
@@ -13,8 +14,8 @@
         android:layout_height="58dp"
         android:layout_marginBottom="28dp"
         android:ems="10"
+        android:hint="Actividad1"
         android:inputType="text"
-        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.134"
@@ -30,23 +31,47 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editTextText" />
 
-    <ScrollView
-        android:layout_width="413dp"
-        android:layout_height="564dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp"
+    <LinearLayout
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/editTextText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.938"
+        tools:layout_editor_absoluteX="0dp">
+
+        <ScrollView
+            android:id="@+id/scrolView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="532dp"
+            android:layout_marginEnd="410dp"
+            android:layout_marginRight="410dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ScrollView>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="80dp"
+        android:layout_height="73dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/scroll"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.826">
-
-        <LinearLayout
-            android:id="@+id/scroll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-    </ScrollView>
+        app:layout_constraintVertical_bias="0.388"
+        tools:srcCompat="@mipmap/ic_mapache_incognito_round"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
