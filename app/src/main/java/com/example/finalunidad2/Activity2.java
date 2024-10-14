@@ -1,6 +1,7 @@
 package com.example.finalunidad2;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -41,23 +43,28 @@ public class Activity2 extends AppCompatActivity {
         Intent recibir = getIntent();
         historial= ((ArrayList<ArrayList<String>>) recibir.getSerializableExtra("historial"));
         for(int i=0;i<historial.size();i++){
+
             TextView nuevoTexto = new TextView(this);
             nuevoTexto.setId(View.generateViewId());
             ((LinearLayout)findViewById(R.id.scroll)).addView(nuevoTexto);
-            nuevoTexto.setText(historial.get(i).get(1).toString());
-            nuevoTexto.setVisibility(View.VISIBLE);
-            nuevoTexto.setMaxWidth(10);
 
+            nuevoTexto.setBackground(ContextCompat.getDrawable(this, R.drawable.rounded_corner));
             if(historial.get(i).get(0).equals("1")){
-                nuevoTexto.setBackgroundColor(Color.RED);
+                nuevoTexto.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffe0f9")));
                 nuevoTexto.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
             }else if(historial.get(i).get(0).equals("2")){
-                nuevoTexto.setBackgroundColor(Color.GREEN);
+                nuevoTexto.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#f5e9d3")));
                 nuevoTexto.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
             }else{
                 nuevoTexto.setBackgroundColor(Color.YELLOW);
             }
-            nuevoTexto.setPadding(10,10,10,10);
+            nuevoTexto.setPadding(10,10,70,10);
+            nuevoTexto.setText(historial.get(i).get(1).toString());
+
+
+            nuevoTexto.setVisibility(View.VISIBLE);
+
+
         }
         (findViewById(R.id.scrolView)).post(new Runnable() {
             public void run() {
