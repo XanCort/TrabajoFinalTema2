@@ -38,9 +38,12 @@ public class Activity2 extends AppCompatActivity {
     }
     @Override
     protected void onResume() {
-
         super.onResume();
         Intent recibir = getIntent();
+
+        LinearLayout vista = findViewById(R.id.scroll);
+        vista.removeAllViews();
+
         historial= ((ArrayList<ArrayList<String>>) recibir.getSerializableExtra("historial"));
         for(int i=0;i<historial.size();i++){
 
@@ -75,13 +78,21 @@ public class Activity2 extends AppCompatActivity {
     }
 
     public void enviarMensaje(View view) {
-        Intent enviar = new Intent(this, MainActivity.class);
-        ArrayList<String> nuevaEntrada = new ArrayList<>();
-        nuevaEntrada.add("2");
-        nuevaEntrada.add(((EditText)findViewById(R.id.editTextText)).getText().toString());
-        historial.add(nuevaEntrada);
-        enviar.putExtra("historial",historial);
+        if(!((EditText)findViewById(R.id.editTextText)).getText().toString().equals("")){
+            ArrayList<String> nuevaEntrada = new ArrayList<>();
+            nuevaEntrada.add("2");
+            nuevaEntrada.add(((EditText)findViewById(R.id.editTextText)).getText().toString());
+            historial.add(nuevaEntrada);
+            cambiarUsuario(view);
+        }
+    }
 
+    /*
+    Método para ir a la otra actividad
+     */
+    public void cambiarUsuario(View view) {
+        Intent enviar = new Intent(this, MainActivity.class);
+        enviar.putExtra("historial",historial);
         startActivity(enviar);
     }
 }
