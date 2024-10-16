@@ -104,8 +104,9 @@ public class MainActivity extends AppCompatActivity {
                 nuevoTexto.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
                 params.gravity=Gravity.END;
             }
+            nuevoTexto.setTextSize(18);
             nuevoTexto.setLayoutParams(params);
-            nuevoTexto.setPadding(10,10,70,10);
+            nuevoTexto.setPadding(20,20,20,20);
             nuevoTexto.setText(historial.get(i).get(1).toString());
             nuevoTexto.setVisibility(View.VISIBLE);
         }
