@@ -86,18 +86,25 @@ public class MainActivity extends AppCompatActivity {
         pero no se puede recuperar un linkedhashmap de un intent se convierte en hashmap, así que esta es la forma que se me ha ocurrido
      */
     public void cargarHistorial(ArrayList<ArrayList<String>> historial){
+        LinearLayout.LayoutParams params;
+
+
         for(int i=0;i<historial.size();i++){
+            params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             TextView nuevoTexto = new TextView(this);
             nuevoTexto.setId(View.generateViewId());
             ((LinearLayout)findViewById(R.id.scroll)).addView(nuevoTexto);
             nuevoTexto.setBackground(ContextCompat.getDrawable(this, R.drawable.rounded_corner));
             if(historial.get(i).get(0).equals("1")){
-                nuevoTexto.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffe0f9")));
+                nuevoTexto.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#A5D6A7")));
                 nuevoTexto.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+                params.gravity=Gravity.START;
             }else if(historial.get(i).get(0).equals("2")){
-                nuevoTexto.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#f5e9d3")));
+                nuevoTexto.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFF59D")));
                 nuevoTexto.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+                params.gravity=Gravity.END;
             }
+            nuevoTexto.setLayoutParams(params);
             nuevoTexto.setPadding(10,10,70,10);
             nuevoTexto.setText(historial.get(i).get(1).toString());
             nuevoTexto.setVisibility(View.VISIBLE);

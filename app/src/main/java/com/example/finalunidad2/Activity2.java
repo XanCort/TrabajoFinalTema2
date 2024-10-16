@@ -53,10 +53,10 @@ public class Activity2 extends AppCompatActivity {
 
             nuevoTexto.setBackground(ContextCompat.getDrawable(this, R.drawable.rounded_corner));
             if(historial.get(i).get(0).equals("1")){
-                nuevoTexto.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffe0f9")));
+                nuevoTexto.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#A5D6A7")));
                 nuevoTexto.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
             }else if(historial.get(i).get(0).equals("2")){
-                nuevoTexto.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#f5e9d3")));
+                nuevoTexto.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFF59D")));
                 nuevoTexto.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
             }else{
                 nuevoTexto.setBackgroundColor(Color.YELLOW);
