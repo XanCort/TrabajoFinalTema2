@@ -54,8 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent recibir = getIntent();
         if(recibir.getSerializableExtra(("historial"))!=null){
+            Log.i("MainActivity", "Historial recibido con "+historial.size()+" elementos");
             historial= ((ArrayList<ArrayList<String>>) recibir.getSerializableExtra("historial"));
             cargarHistorial(historial);
+        }else {
+            Log.e("MainActivity", "Error: El historial es nulo al recibirlo.");
         }
 
 
@@ -73,7 +76,10 @@ public class MainActivity extends AppCompatActivity {
             nuevaEntrada.add("1");
             nuevaEntrada.add(((EditText)findViewById(R.id.editTextText)).getText().toString());
             historial.add(nuevaEntrada);
+            Log.i("MainActivity","Mensaje \""+nuevaEntrada.get(1)+"\" añadido al historial con la id:"+nuevaEntrada.get(0));
             cambiarUsuario(view);
+        }else{
+            Log.w("MainActivity", "El mensaje está vacío.");
         }
     }
 
@@ -125,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
     public void cambiarUsuario(View view) {
         Intent enviar = new Intent(this, Activity2.class);
         enviar.putExtra("historial",historial);
+        Log.d("MainActivity", "Se enviará el historial de mensaje con " + historial.size() + " elementos.");
         startActivity(enviar);
     }
 }
